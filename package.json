@@ -1,0 +1,25 @@
+{
+  "name": "advent-of-code-2024",
+  "version": "1.0.0",
+  "description": "KY advent of code 2024",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KuranosukeYamada/advent-of-code-2024.git"
+  },
+  "keywords": [
+    "advent2024"
+  ],
+  "author": "Kura Yamada",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/KuranosukeYamada/advent-of-code-2024/issues"
+  },
+  "homepage": "https://github.com/KuranosukeYamada/advent-of-code-2024#readme",
+  "dependencies":{
+    "@types/node":"^7.0.5"
+  }
+}
