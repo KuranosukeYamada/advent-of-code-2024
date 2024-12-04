@@ -4,25 +4,29 @@ Object.defineProperty(exports, "__esModule", { value: true });
 * Part 1 GOAL: Find XMAS in any order
 */
 var fs = require("fs");
-var input = fs.readFileSync('example.txt', 'utf-8');
-var patterns = [/XMAS/, /X\w/];
-function rotateLeft(input, n) {
-    if (n === void 0) { n = 1; }
-    var res = input.substring(1, input.length) + input[0];
-    while (n > 0) {
-        res = res.substring(1, res.length) + res[0];
-        n--;
+var input = fs.readFileSync('input.txt', 'utf-8');
+var example = fs.readFileSync('example.txt', 'utf-8');
+function createDynamicRegEx(numArray) {
+    // the f characters in the basePattern below represent the flags that need to be replaced by digits
+    var basePattern = "(?=XfMfAfS|SfAfMfX)";
+    var res = [];
+    console.log(numArray);
+    for (var i = 0; i < numArray.length; i++) {
+        var dynamicPattern = basePattern.replace(/f/g, ".{".concat(numArray[i], "}"));
+        res.push(new RegExp(dynamicPattern, "gs"));
     }
     return res;
 }
-function sumMatches(input) {
+function findSum(input, patterns) {
     var sum = 0;
-    var n = 3;
-    while (n > 0) {
-        var XMASArray = rotateLeft(input, n).match(/XMAS/g);
-        var rotatedArray = rotateLeft(input, n).match(/X[XMAS]{3}\n[XMAS]M[XMAS]{2}\n[XMAS]{2}A[XMAS]\n[XMAS]{3}S/g);
-        sum += XMASArray.length + rotatedArray.length;
+    for (var i = 0; i < patterns.length; i++) {
+        if (input.match(patterns[i]) !== null) {
+            sum += input.match(patterns[i]).length;
+        }
     }
     return sum;
 }
-console.log(sumMatches(input));
+var examplePatterns = createDynamicRegEx([0, 9, 10, 11]);
+var patterns = createDynamicRegEx([0, 139, 140, 141]);
+console.log("example:", findSum(example, examplePatterns));
+console.log("solution:", findSum(input, patterns));
