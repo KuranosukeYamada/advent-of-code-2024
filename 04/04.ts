@@ -36,3 +36,8 @@ const patterns:RegExp[] = createDynamicRegEx([0, 139, 140,141]);
 
 console.log("example:", findSum(example, examplePatterns));
 console.log("solution:", findSum(input, patterns));
+
+const p2ExampleExp:RegExp[] = [/(?=(?<first>M|S).(?<second>S|M).{9}A.{9}(?!\k<second>)[MS].(?!\k<first>)[MS])/gs];
+const p2SolutionExp:RegExp[] = [/(?=(?<first>M|S).(?<second>S|M).{139}A.{139}(?!\k<second>)[MS].(?!\k<first>)[MS])/gs]
+console.log("pt2 example:", findSum(example, p2ExampleExp));
+console.log("pt2 solution:", findSum(input, p2SolutionExp));
