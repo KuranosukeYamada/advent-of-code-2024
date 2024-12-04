@@ -19,7 +19,8 @@
     "url": "https://github.com/KuranosukeYamada/advent-of-code-2024/issues"
   },
   "homepage": "https://github.com/KuranosukeYamada/advent-of-code-2024#readme",
-  "dependencies":{
-    "@types/node":"^7.0.5"
+  "dependencies": {
+    "@types/node": "^7.0.5",
+    "esrun": "^3.2.26"
   }
 }
