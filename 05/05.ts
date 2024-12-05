@@ -51,6 +51,23 @@ function sumMiddle():number{
   return sum;
 }
 
+// find the true middle for part 2
+function truelyMid(rows: string[]): string {
+    return rows.find(x => trueIndex(x, rows) === Math.floor(rows.length / 2))!;
+}
+
+// find the middle sums of the INCORRECT rows for part 2
+function sumWrongMiddle():number{
+  var sum = 0;
+  for(var rows of updates){
+    if(!isOrdered(rows) && rows.length > 1){
+      //console.log(rows);
+      sum+= parseInt(truelyMid(rows));
+    }
+  }
+  return sum;
+}
 
 
-console.log(sumMiddle());
+console.log(`correct rows sum:${sumMiddle()}`);
+console.log(`incorrect rows sum:${sumWrongMiddle()}`);
