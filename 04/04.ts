@@ -6,6 +6,9 @@ import * as fs from 'fs';
 const input:string = fs.readFileSync('input.txt', 'utf-8');
 const example:string = fs.readFileSync('example.txt', 'utf-8');
 
+// Goal of this function is to generate regExp patterns that match XMAS or SAMX
+// the spacing between each character depends on the match pattern
+// Ex. vertical matches will always have each character spaced rowLength apart
 function createDynamicRegEx(numArray:number[]):RegExp[]{
   // the f characters in the basePattern below represent the flags that need to be replaced by digits
   const basePattern = "(?=XfMfAfS|SfAfMfX)";
