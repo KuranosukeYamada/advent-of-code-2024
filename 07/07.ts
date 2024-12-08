@@ -10,6 +10,30 @@ const input = rawFile
     // avoids having to split twice
     .map(line => line.replace(':', '').split(' ').map(Number));
 
+/* DIDN'T END UP WORKING BUT MAY BE USEFUL FOR PART TWO
+// parses input file as an object where the keys are the targets and the values are the operands
+function parseKeyValuePairs(input: string): Record<string, number[]> {
+    // split into line and remove white-space
+    const lines = input.trim().split('\n');
+
+    // initialize return object
+    const result: Record<string, number[]> = {};
+
+    for (const line of lines) {
+        // store key by splitting by colon
+        const [key, valueString] = line.split(':');
+
+        // split values into array of numbers by single space
+        const values = valueString.trim().split(' ').map(Number);
+
+        // remove whitespace from operands and store at key-value
+        result[key.trim()] = values;
+    }
+
+    return result;
+}
+*/
+
 // creating add, mul operators
 const add = (a:number, b:number):number => a + b;
 const mul = (a:number, b:number):number => a * b;
