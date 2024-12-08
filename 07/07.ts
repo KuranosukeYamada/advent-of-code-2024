@@ -4,11 +4,13 @@ const rawFile = fs.readFileSync('input.txt', 'utf-8');
 
 // splits file by line
 // tried using object type but kept running into type-errors lol
-const input = rawFile
-    .trim()
-    .split('\n')
-    // avoids having to split twice
-    .map(line => line.replace(':', '').split(' ').map(Number));
+const input: Array<[number, ...number[]]> = rawFile
+  .trim()
+  .split('\n')
+  .map(line => {
+    const [key, values] = line.split(':');
+    return [Number(key.trim()), ...values.trim().split(' ').map(Number)];
+  });
 
 /* DIDN'T END UP WORKING BUT MAY BE USEFUL FOR PART TWO
 // parses input file as an object where the keys are the targets and the values are the operands
