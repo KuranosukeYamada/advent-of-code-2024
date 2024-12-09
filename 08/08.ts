@@ -5,7 +5,6 @@ const input:string[] = fs.readFileSync('input.txt', 'utf-8').trim().split('\n');
 
 // example string used for validation has already marked antinode positions
 const example:string[] = fs.readFileSync('example.txt', 'utf-8').replace('#', '.').trim().split('\n');
-console.log(example);
 
 
 // Antennas is an object that has the string marker as the key and the location coordinates as an array in the values
@@ -42,8 +41,11 @@ function saveAntinodes(input:string, antennas:Record<string,[number, number][]>)
         const dx = a[0] - b[0];
         const dy = a[1] - b[1];
 
+        // while validPosition for position = new antinode position, add nx ny
         const nx = b[0] - dx;
         const ny = b[1] - dy;
+
+
         res.add(`${nx}, ${ny}`);
       }
     }
@@ -73,6 +75,46 @@ function countValidAntinodes(input:string, antinodes:Record<string,[number, numb
   return count;
 }
 
+
+
 const antennas = saveAntennas(input);
 const antinodes = saveAntinodes(input, antennas);
 console.log(countValidAntinodes(input, antinodes));
+
+
+function pt2Antinodes(input:string, antennas:Record<string, [number, number][]>):Set<string>{
+  var res = new Set<string>();
+  // loop through antennas and only save positions
+  for(const [_, positions] of Object.entries(antennas)){
+    // loop through all positions
+    for(const a of positions){
+      for(const b of positions){
+        if(a[0] === b[0] && a[1] === b[1]){
+          continue;
+        }
+        const dx = a[0] - b[0];
+        const dy = a[1] - b[1];
+
+        // initialized at the b-point due to while loop below
+        let nx = b[0];
+        let ny = b[1];
+
+        res.add(`${nx}, ${ny}`);
+        // while the nx, ny is within the bounds, continue along the same vector
+        // this should get both directions
+        while(validPosition([nx, ny], input)){
+          res.add(`${nx}, ${ny}`);
+          nx -= dx;
+          ny -= dy;
+        }
+      }
+    }
+  }
+
+  return res;
+}
+
+
+
+const antinodes2:Set<string> = pt2Antinodes(input, antennas);
+console.log(countValidAntinodes(input, antinodes2));
