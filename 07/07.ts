@@ -4,9 +4,11 @@ const rawFile = fs.readFileSync('input.txt', 'utf-8');
 
 // splits file by line
 // tried using object type but kept running into type-errors lol
+// returns an nd array (i.e. array of number[])
 const input: Array<[number, ...number[]]> = rawFile
   .trim()
   .split('\n')
+  // each key-value pair gets returned as a single array
   .map(line => {
     const [key, values] = line.split(':');
     return [Number(key.trim()), ...values.trim().split(' ').map(Number)];
@@ -39,6 +41,8 @@ function parseKeyValuePairs(input: string): Record<string, number[]> {
 // creating add, mul operators
 const add = (a:number, b:number):number => a + b;
 const mul = (a:number, b:number):number => a * b;
+// added concatenation for part two
+const cat = (a: number, b: number): number => parseInt(`${a}${b}`);
 
 
 // solve for each target recursively using each operator
@@ -73,3 +77,13 @@ for(let line of input){
 }
 
 console.log(solutionOne);
+
+var solutionTwo = 0;
+for(let line of input){
+  if(solve(line, [add, mul, cat])){
+    const [target, ..._] = line;
+    solutionTwo+= target;
+  }
+}
+
+console.log(solutionTwo);
